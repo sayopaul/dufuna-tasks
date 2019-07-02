@@ -1,0 +1,95 @@
+﻿Ademola Abisayo Paul
+@sayopaul
+Timbuktu
+
+
+1. Describe how you would implement a CGPA calculator in Python.
+To implement this , I would need to store each course offered (course code ), their respective number of units and  the grade obtained in each course. For this , I would use two dictionaries . The fist dictionary would map the course code to the units and the second dictionary would map the course code to the grade obtained . I choose to use a dictionary over a list for the grade obtained because it would allow me to loop through the two of them using just one loop  . The keys are the same ( I.e the course codes ) hence I can use one loop to get the values of the dictionaries whereas I would have had to use another loop if I was using a list . 
+
+
+The grade obtained would be mapped to a number of points following the format  where A represents 5 points , B – 4points , C – 3 points , D – 2 points and E – 1 point . Any thing lower than that is a fail and it is given 0 point . 
+I would total the number of units for all the courses and call it totalUnitsAvailable . I would then multiply the units for each course by the grade obtained in the course and add everything together. I would call this total the totalUnitsObtained . The totalUnitsObtained is then divided by the totalUnitsAvailable and the cgpa is gotten .
+
+
+2. Implement the CGPA calculator in question 1 in form of Python function. ​ Add a
+note explaining how your calculator works. Also add comments to your
+code where appropriate.
+
+
+def cgpaCalculator():
+        #maps courses to their respective number of units
+        coursesAndUnits={}
+        #maps courses to the grades obtained (i.e A,B,C,D)
+        coursesAndGrades={}
+        #maps grades to points
+        gradesAndPoints = {"A":5,"B":4,"C":3,"D":2,"E":1}
+        #the total number of units obtained by the student , i.e the course unit multiplied by the grade
+        totalUnitsAcquired = 0
+        #total number of units available for that semester
+        totalUnitsAvailable = 0
+        cgpa=0
+        numberOfCourses= input("Please enter the number of courses \n")
+        for i in range(0,int(numberOfCourses)):
+            #for each of the courses , we want to get the course code , number of units and grade obtained
+            courseCode= input("Please enter the course code \n")
+            courseUnits = input("Please enter the number of units \n")
+            courseGrade = input("Please enter the grade \n").upper()
+            coursesAndUnits[courseCode]=courseUnits
+            coursesAndGrades[courseCode]=courseGrade
+
+
+        for course,units in list(coursesAndUnits.items()):
+            #we convert the grades to the number of points they carry
+            totalUnitsAvailable += int(units)
+            totalUnitsAcquired += (int(units) * gradesAndPoints[coursesAndGrades[course]])
+        cgpa = round((totalUnitsAcquired / totalUnitsAvailable),2)
+        print(f" You registered {numberOfCourses} courses and your cgpa is {cgpa} . ")
+cgpaCalculator()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HOW IT WORKS
+I used the method that is used here in my school ( the Federal University of Agriculture , Abeokuta ) .
+
+Per semester , we offer a certain number of courses and each course has a particular number of unit(s) . The grading system for a course goes thus
+A – 5 points
+B – 4 points
+C – 3 points
+D – 2 points
+E – 1 point
+Anything below – 0 point
+
+
+The total number of units per semester is calculated and then it is divided by the summation of the product of the points obtained in that course and the number of units for that course .
+
+
+For example say , I offered 4 courses CA , CB, CC, CD ;
+CA – 3 units course ---------- A (5/5)
+CB– 2 units course ---------- C (3/5)
+CC– 1 unit course  ---------- A (5/5)
+CD– 2 units course ---------- D (2/5)
+
+The total number of units would be 3 + 2 + 1 + 2 = 8 units
+The summation of the product of the points obtained in that course and the number of units for that course would be ( 3 * 5) + ( 2 * 3) + ( 1 * 5) + ( 2 * 2) = 15 + 6 +5 + 4 = 30 
+
+
+CGPA = 30 /8 = 3.75
